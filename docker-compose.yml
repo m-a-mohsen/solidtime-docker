@@ -5,6 +5,9 @@ services:
     user: "1000:1000"
     expose:
       - "8000"
+    networks:
+      - coolify
+      - default
     volumes:
       - "app-storage:/var/www/html/storage"
       - "logs:/var/www/html/storage/logs"
@@ -78,6 +81,10 @@ services:
       - "--api-port=3003"
     healthcheck:
       test: [ "CMD", "curl", "--silent", "--fail", "http://localhost:3003/health" ]
+
+networks:
+  coolify:
+    external: true
 
 volumes:
   database-storage:
